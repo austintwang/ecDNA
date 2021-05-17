@@ -7,15 +7,15 @@ def parse_paf(paf_path, q_cutoff):
     with open(paf_path, "r") as paf_file:
         for line in paf_file:
             cols = line.strip().split()
-            qual = int(line[11])
+            qual = int(cols[11])
             if qual < q_cutoff or qual == 255:
                 continue
 
-            qname = line[0]
-            qlen, qstart, qend = int(line[1]), int(line[2]), int(line[3])
-            strand = line[4]
-            rname = line[5]
-            rstart, rend = int(line[6]), int(line[7])
+            qname = cols[0]
+            qlen, qstart, qend = int(cols[1]), int(cols[2]), int(cols[3])
+            strand = cols[4]
+            rname = cols[5]
+            rstart, rend = int(cols[6]), int(cols[7])
 
             seq_data = (qstart, qend, strand, rname, rstart, rend)
             seqs.setdefault(qname, []).append(seq_data)
