@@ -15,7 +15,7 @@ def parse_paf(paf_path, q_cutoff):
             qlen, qstart, qend = int(cols[1]), int(cols[2]), int(cols[3])
             strand = cols[4]
             rname = cols[5]
-            rstart, rend = int(cols[6]), int(cols[7])
+            rstart, rend = int(cols[7]), int(cols[8])
 
             seq_data = (qstart, qend, strand, rname, rstart, rend)
             seqs.setdefault(qname, []).append(seq_data)
@@ -31,7 +31,7 @@ def get_breakpoints(paf_path, out_path, q_cutoff):
     for k, v in seqs.items():
         if len(v) >= 2:
             s = sorted(v)
-            # print(s) ####
+            print(s) ####
             seqs_filtered[k] = s
             lens_filtered[k] = lens[k]
 
