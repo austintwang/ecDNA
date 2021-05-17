@@ -31,10 +31,11 @@ def get_breakpoints(paf_path, out_path, q_cutoff):
     for k, v in seqs.items():
         if len(v) >= 2:
             s = sorted(v)
-            print(s) ####
+            # print(s) ####
             seqs_filtered[k] = s
             lens_filtered[k] = lens[k]
 
+    print(len(seqs), len(seqs_filtered))
     res = (seqs_filtered, lens_filtered)
     with open(out_path, "wb") as out_file:
         pickle.dump(res, out_file)
