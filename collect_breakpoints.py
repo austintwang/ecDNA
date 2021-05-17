@@ -39,7 +39,7 @@ def get_breakpoints(paf_path, out_path, q_cutoff):
         pickle.dump(res, out_file)
 
 if __name__ == "__main__":
-    data_dir = "/oak/stanford/groups/wjg/atwang/scdna/data"
+    data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
     paf_path = 
     out_path = 
 
