@@ -48,7 +48,7 @@ def gather_distal_breaks(reads_distal, gene_contig, gene_strand, gene_pos, radiu
 
 def analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh):
     with open(reads_path, "rb") as reads_file:
-        reads_repeat, reads_foldback, reads_distal = pickle.load(reads_file)
+        reads_repeat, reads_foldback, reads_distal, _ = pickle.load(reads_file)
 
     for name, contig, strand, pos in genes:
         in_breaks, out_breaks = gather_distal_breaks(reads_distal, contig, strand, pos, radius, overlap_thresh)
