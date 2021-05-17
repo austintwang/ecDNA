@@ -15,7 +15,7 @@ def separate_repeats(seqs, overlap_thresh):
             if v[i][3] != v[i-1][3]:
                 has_distal = True
                 continue
-            overlap = (v[i-1][5] - v[i][4]) / min(v[i][5] - v[i][4], v[i-1][5] - v[i-1][4])
+            overlap = (min(v[i-1][5], v[i][5]) - max(v[i-1][4], v[i][4])) / min(v[i][5] - v[i][4], v[i-1][5] - v[i-1][4])
             if overlap > overlap_thresh:
                 if v[i][2] != v[i-1][2]:
                     has_foldback = True
