@@ -44,7 +44,7 @@ def gather_distal_breaks(reads_distal, gene_contig, gene_strand, gene_pos, radiu
                     elif gene_strand == "-" and b_strand == "-":
                         in_breaks.append((b_contig, b_strand, b_pos, a_contig, a_strand, a_pos, k),)
 
-    in_breaks, out_breaks
+    return in_breaks, out_breaks
 
 def analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh):
     with open(reads_path, "rb") as reads_file:
