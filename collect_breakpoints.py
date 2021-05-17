@@ -6,7 +6,7 @@ def parse_paf(paf_path, q_cutoff):
     lens = {}
     with open(paf_path, "r") as paf_file:
         for line in paf_file:
-            cols = line.strip.split()
+            cols = line.strip().split()
             qual = int(line[11])
             if qual < q_cutoff or qual == 255:
                 continue
