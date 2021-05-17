@@ -2,7 +2,7 @@ import pickle
 import os
 
 
-def gather_distal_breaks(reads_distal, gene_contig, gene_pos, radius, overlap_thresh):
+def gather_distal_breaks(reads_distal, gene_contig, gene_strand, gene_pos, radius, overlap_thresh):
     min_pos = gene_pos - radius
     max_pos = gene_pos + radius
 
@@ -24,9 +24,9 @@ def gather_distal_breaks(reads_distal, gene_contig, gene_pos, radius, overlap_th
                     b_strand = v[i-1][2]
                     b_pos = v[i-1][5] if b_strand == "+" else v[i-1][4]
 
-                    if a_strand == "+":
+                    if gene_strand == "+" and a_strand == "+":
                         in_breaks.append((b_contig, b_strand, b_pos, a_contig, a_strand, a_pos, k),)
-                    else:
+                    elif gene_strand == "-" and b_strand == "-":
                         out_breaks.append((a_contig, a_strand, a_pos, b_contig, b_strand, b_pos, k),)
 
             if i < len(v) - 1:
@@ -39,9 +39,9 @@ def gather_distal_breaks(reads_distal, gene_contig, gene_pos, radius, overlap_th
                     b_strand = v[i+1][2]
                     b_pos = v[i+1][5] if b_strand == "-" else v[i+1][4]
 
-                    if a_strand == "+":
+                    if gene_strand == "+" and a_strand == "+":
                         out_breaks.append((a_contig, a_strand, a_pos, b_contig, b_strand, b_pos, k),)
-                    else:
+                    elif gene_strand == "-" and b_strand == "-":
                         in_breaks.append((b_contig, b_strand, b_pos, a_contig, a_strand, a_pos, k),)
 
     in_breaks, out_breaks
@@ -50,8 +50,8 @@ def analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh):
     with open(reads_path, "rb") as reads_file:
         reads_repeat, reads_foldback, reads_distal = pickle.load(reads_file)
 
-    for name, contig, pos in genes:
-        in_breaks, out_breaks = gather_distal_breaks(reads_distal, contig, pos, radius, overlap_thresh)
+    for name, contig, strand, pos in genes:
+        in_breaks, out_breaks = gather_distal_breaks(reads_distal, contig, strand, pos, radius, overlap_thresh)
         print(in_breaks) ####
         print(out_breaks) ####
 
@@ -66,5 +66,10 @@ if __name__ == "__main__":
     results_dir = os.path.join(data_dir, "genes")
     os.makedirs(results_dir, exist_ok=True)
 
-    overlap_thresh = 0.5
-    filter_breakpoints(in_path, out_path, overlap_thresh)
+    genes = [
+        ("ENSG00000136997", "NC_000008.11", "+", 127735434)
+    ]
+
+    radius = 1e5
+    overlap_thresh = 0.
+    analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh)
