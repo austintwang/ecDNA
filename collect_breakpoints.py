@@ -1,4 +1,5 @@
 import pickle
+import os
 
 def parse_paf(paf_path, q_cutoff):
     seqs = {}
@@ -44,3 +45,4 @@ if __name__ == "__main__":
     out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_splits.pickle")
 
     q_cutoff = 50
+    get_breakpoints(paf_path, out_path, q_cutoff)
