@@ -63,8 +63,8 @@ def analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh):
 if __name__ == "__main__":
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
     reads_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_cats.pickle")
-    results_dir = os.path.join(data_dir, "genes")
-    os.makedirs(results_dir, exist_ok=True)
+    out_dir = os.path.join(data_dir, "genes")
+    os.makedirs(out_dir, exist_ok=True)
 
     genes = [
         ("ENSG00000136997", "NC_000008.11", "+", 127735434)
