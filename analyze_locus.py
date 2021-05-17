@@ -52,8 +52,10 @@ def analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh):
 
     for name, contig, strand, pos in genes:
         in_breaks, out_breaks = gather_distal_breaks(reads_distal, contig, strand, pos, radius, overlap_thresh)
-        print(in_breaks) ####
-        print(out_breaks) ####
+        for i in sorted(in_breaks): ####
+            print(i[0], i[1], i[2]) ####
+        for i in sorted(out_breaks, key=(lambda x: x[3:])) ####
+            print(i[3], i[4], i[5]) ####
 
         res = (in_breaks, out_breaks)
         out_path = os.path.join(out_dir, f"{name}_breaks_distal.pickle")
