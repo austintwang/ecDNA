@@ -15,7 +15,7 @@ def gather_distal_breaks(reads_distal, gene_contig, gene_strand, gene_pos, radiu
                 continue
             
             if i > 0:
-                overlap = (v[i-1][5] - v[i][4]) / min(v[i][5] - v[i][4], v[i-1][5] - v[i-1][4])
+                overlap = (min(v[i-1][5], v[i][5]) - max(v[i-1][4], v[i][4])) / min(v[i][5] - v[i][4], v[i-1][5] - v[i-1][4])
                 if overlap <= overlap_thresh:
                     a_contig = v[i][3]
                     a_strand = v[i][2]
@@ -30,7 +30,7 @@ def gather_distal_breaks(reads_distal, gene_contig, gene_strand, gene_pos, radiu
                         out_breaks.append((a_contig, a_strand, a_pos, b_contig, b_strand, b_pos, k),)
 
             if i < len(v) - 1:
-                overlap = (v[i][5] - v[i+1][4]) / min(v[i+1][5] - v[i+1][4], v[i][5] - v[i][4])
+                overlap = (min(v[i][5], v[i+1][5]) - max(v[i][4], v[i+1][4])) / min(v[i+1][5] - v[i+1][4], v[i][5] - v[i][4])
                 if overlap <= overlap_thresh:
                     a_contig = v[i][3]
                     a_strand = v[i][2]
