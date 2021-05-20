@@ -48,14 +48,14 @@ def gather_distal_breaks(reads_distal, gene_contig, gene_strand, gene_pos, radiu
 
 def group_breaks(in_breaks, out_breaks, bucket_size):
     in_grouped = {}
-    for k, v in in_breaks.items():
+    for v in in_breaks:
         contig, strand, pos = v[0], v[1], v[2]
         bucket = (contig, strand, pos // bucket_size * bucket_size)
         in_grouped.setdefault(bucket, 0)
         in_grouped[bucket] += 1
 
     out_grouped = {}
-    for k, v in out_breaks.items():
+    for v in out_breaks:
         contig, strand, pos = v[3], v[4], v[5]
         bucket = (contig, strand, pos // bucket_size * bucket_size)
         out_grouped.setdefault(bucket, 0)
