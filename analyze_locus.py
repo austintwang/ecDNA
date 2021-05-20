@@ -71,9 +71,11 @@ def analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh, bucket_size
     for name, contig, strand, pos in genes:
         in_breaks, out_breaks = gather_distal_breaks(reads_distal, contig, strand, pos, radius, overlap_thresh)
         in_grouped, out_grouped = group_breaks(in_breaks, out_breaks, bucket_size)
-        for k, v in in_grouped.items(): ####
+        for k in sorted(in_grouped): ####
+            v = in_grouped[k]
             print(k, v) ####
-        for k, v in out_grouped.items(): ####
+        for k in sorted(out_grouped): ####
+            v = out_grouped[k]
             print(k, v) ####
 
         res = (in_breaks, out_breaks)
