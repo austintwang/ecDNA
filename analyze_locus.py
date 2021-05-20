@@ -46,15 +46,34 @@ def gather_distal_breaks(reads_distal, gene_contig, gene_strand, gene_pos, radiu
 
     return in_breaks, out_breaks
 
-def analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh):
+def group_breaks(in_breaks, out_breaks, bucket_size):
+    in_grouped = {}
+    for k, v in in_breaks.items():
+        contig, strand, pos = v[0], v[1], v[2]
+        bucket = (contig, strand, pos // bucket_size * bucket_size)
+        in_grouped.setdefault(bucket, 0)
+        in_grouped[bucket] += 1
+
+    out_grouped = {}
+    for k, v in out_breaks.items():
+        contig, strand, pos = v[3], v[4], v[5]
+        bucket = (contig, strand, pos // bucket_size * bucket_size)
+        out_grouped.setdefault(bucket, 0)
+        out_grouped[bucket] += 1
+
+    return in_grouped, out_grouped
+
+
+def analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh, bucket_size):
     with open(reads_path, "rb") as reads_file:
         reads_repeat, reads_foldback, reads_distal, _ = pickle.load(reads_file)
 
     for name, contig, strand, pos in genes:
         in_breaks, out_breaks = gather_distal_breaks(reads_distal, contig, strand, pos, radius, overlap_thresh)
-        for i in sorted(in_breaks): ####
+        in_grouped, out_grouped = group_breaks(in_breaks, out_breaks, bucket_size)
+        for i in sorted(in_grouped): ####
             print(i[0], i[1], i[2]) ####
-        for i in sorted(out_breaks, key=(lambda x: x[3:])): ####
+        for i in sorted(out_grouped, key=(lambda x: x[3:])): ####
             print(i[3], i[4], i[5]) ####
 
         res = (in_breaks, out_breaks)
@@ -74,4 +93,5 @@ if __name__ == "__main__":
 
     radius = 1e5
     overlap_thresh = 0.
-    analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh)
+    bucket_size = 1e4
+    analyze_loci(reads_path, out_dir, genes, radius, overlap_thresh, bucket_size)
