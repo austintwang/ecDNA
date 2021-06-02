@@ -24,8 +24,8 @@ def get_breaks(seqs, resolution):
             p = parse_seq(i, resolution)
             pts.append(p)
         for x in range(len(pts) - 1):
-            a = pts[i][1]
-            b = pts[i+1][0]
+            a = pts[x][1]
+            b = pts[x+1][0]
             br = (a, b)
             breaks.setdefault(br, 0)
             breaks[br] += 1
