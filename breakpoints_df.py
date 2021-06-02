@@ -42,7 +42,7 @@ def get_breaks_df(breaks):
         breaks_lst.append([chrom_from, strand_from, pos_from, chrom_to, strand_to, pos_to, freq])
 
     cols = ["chrom_from", "strand_from", "pos_from", "chrom_to", "strand_to", "pos_to", "frequency"]
-    breaks_df = pd.DataFrame.from_records(breaks_lst, cols=cols)
+    breaks_df = pd.DataFrame.from_records(breaks_lst, columns=cols)
     return breaks_df
 
 def breakpoints_df(in_path, out_path, resolution):
