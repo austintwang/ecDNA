@@ -55,7 +55,7 @@ def breakpoints_df(in_path, out_path, resolution):
     breaks_df = get_breaks_df(breaks)
 
     print(breaks_df) ####
-    print(breaks_df[breaks_df["frequency"] >= 2]) ####
+    print(breaks_df[breaks_df["frequency"] >= 2].to_string()) ####
 
     res = breaks_df, breaks
     with open(out_path, "wb") as out_file:
