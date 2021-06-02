@@ -38,7 +38,7 @@ def get_breaks_df(breaks):
         a, b = k
         chrom_from, strand_from, pos_from = a
         chrom_to, strand_to, pos_to = b
-        freq = b
+        freq = v
         breaks_lst.append([chrom_from, strand_from, pos_from, chrom_to, strand_to, pos_to, freq])
 
     cols = ["chrom_from", "strand_from", "pos_from", "chrom_to", "strand_to", "pos_to", "frequency"]
