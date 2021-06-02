@@ -24,7 +24,7 @@ def parse_paf(paf_path, q_cutoff):
 
     return seqs, lens
 
-def get_breakpoints(paf_path, out_path, q_cutoff):
+def get_breakpoints(paf_path, out_path, out_path_all, q_cutoff):
     seqs, lens = parse_paf(paf_path, q_cutoff)
     seqs_filtered = {}
     lens_filtered = {}
@@ -39,11 +39,15 @@ def get_breakpoints(paf_path, out_path, q_cutoff):
     res = (seqs_filtered, lens_filtered)
     with open(out_path, "wb") as out_file:
         pickle.dump(res, out_file)
+    res_all = (seqs, lens)
+    with open(out_path_all, "wb") as out_file:
+        pickle.dump(res_all, out_file)
 
 if __name__ == "__main__":
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
     paf_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_map.paf")
     out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_splits.pickle")
+    out_path_all = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_all.pickle")
 
     q_cutoff = 50
-    get_breakpoints(paf_path, out_path, q_cutoff)
+    get_breakpoints(paf_path, out_path, out_path_all, q_cutoff)
