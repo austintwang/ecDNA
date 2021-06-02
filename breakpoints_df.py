@@ -4,10 +4,10 @@ import numpy as np
 import pandas as pd
 
 def parse_seq(seq, resolution):
-    strand = i[3]
-    chrom = i[4]
-    start = i[5]
-    end = i[6]
+    strand = seq[3]
+    chrom = seq[4]
+    start = seq[5]
+    end = seq[6]
     strand_sgn = 1 if strand == "+" else -1
     start_bucket = int(start // resolution) * resolution * strand_sgn
     end_bucket = int(end // resolution) * resolution * strand_sgn
