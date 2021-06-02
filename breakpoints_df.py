@@ -37,11 +37,13 @@ def get_breaks_df(breaks):
     for k, v in breaks.items():
         a, b = k
         chrom_from, strand_from, pos_from = a
+        seq_from = (chrom_from, strand_from)
         chrom_to, strand_to, pos_to = b
+        seq_to = (chrom_to, strand_to)
         freq = v
-        breaks_lst.append([chrom_from, strand_from, pos_from, chrom_to, strand_to, pos_to, freq])
+        breaks_lst.append([seq_from, chrom_from, strand_from, pos_from, seq_to, chrom_to, strand_to, pos_to, freq])
 
-    cols = ["chrom_from", "strand_from", "pos_from", "chrom_to", "strand_to", "pos_to", "frequency"]
+    cols = ["seq_from", "chrom_from", "strand_from", "seq_to", "pos_from", "chrom_to", "strand_to", "pos_to", "frequency"]
     breaks_df = pd.DataFrame.from_records(breaks_lst, columns=cols)
     return breaks_df
 
@@ -55,14 +57,14 @@ def breakpoints_df(in_path, out_path, resolution):
     print(breaks_df) ####
     print(breaks_df[breaks_df["frequency"] >= 2]) ####
 
-    res = breaks_hc, breaks
+    res = breaks_df, breaks
     with open(out_path, "wb") as out_file:
         pickle.dump(res, out_file)
 
 if __name__ == "__main__":
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
     in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_splits.pickle")
-    out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_breaks_df.pickle")
+    out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_breaks_proc.pickle")
 
     resolution = 1e3
     breakpoints_df(in_path, out_path, resolution)
