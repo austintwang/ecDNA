@@ -65,4 +65,4 @@ if __name__ == "__main__":
     out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_breaks_df.pickle")
 
     resolution = 1e4
-    breakpoints_df(in_path, out_path, overlap_thresh)
+    breakpoints_df(in_path, out_path, resolution)
