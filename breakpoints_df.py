@@ -16,8 +16,8 @@ def parse_seq(seq, resolution):
     return start_pt, end_pt
 
 def get_breaks(seqs, resolution):
-    points_set = set()
     breaks = {}
+    freqs_from = {}
     for k, v in seqs.items():
         pts = []
         for i in v:
@@ -27,12 +27,17 @@ def get_breaks(seqs, resolution):
             a = pts[x][1]
             b = pts[x+1][0]
             br = (a, b)
+
             breaks.setdefault(br, 0)
             breaks[br] += 1
+            freqs_from.setdefault(a, 0)
+            freqs_from[a] += 1
+            freqs_to.setdefault(b, 0)
+            freqs_to[b] += 1
 
-    return breaks
+    return breaks, freqs_from, freqs_to
 
-def get_breaks_df(breaks):
+def get_breaks_df(breaks, freqs_from, freqs_to):
     breaks_lst = []
     for k, v in breaks.items():
         a, b = k
@@ -40,10 +45,36 @@ def get_breaks_df(breaks):
         seq_from = (chrom_from, strand_from)
         chrom_to, strand_to, pos_to = b
         seq_to = (chrom_to, strand_to)
-        freq = v
-        breaks_lst.append([seq_from, chrom_from, strand_from, pos_from, seq_to, chrom_to, strand_to, pos_to, freq])
+        freq_pair = v
+        freq_from = freqs_from[a]
+        freq_to = freqs_to[b]
+        breaks_lst.append([
+            seq_from, 
+            chrom_from, 
+            strand_from, 
+            pos_from, 
+            seq_to, 
+            chrom_to, 
+            strand_to, 
+            pos_to, 
+            freq_pair, 
+            freq_from, 
+            freq_to
+        ])
 
-    cols = ["seq_from", "chrom_from", "strand_from", "seq_to", "pos_from", "chrom_to", "strand_to", "pos_to", "frequency"]
+    cols = [
+        "seq_from", 
+        "chrom_from", 
+        "strand_from", 
+        "seq_to", 
+        "pos_from", 
+        "chrom_to", 
+        "strand_to", 
+        "pos_to", 
+        "freq_pair",
+        "freq_from",
+        "freq_to"
+    ]
     breaks_df = pd.DataFrame.from_records(breaks_lst, columns=cols)
     return breaks_df
 
@@ -51,13 +82,13 @@ def breakpoints_df(in_path, out_path, resolution):
     with open(in_path, "rb") as in_file:
         seqs, lens = pickle.load(in_file)
 
-    breaks = get_breaks(seqs, resolution)
-    breaks_df = get_breaks_df(breaks)
+    breaks, freqs_from, freqs_to = get_breaks(seqs, resolution)
+    breaks_df = get_breaks_df(breaks, freqs_from, freqs_to)
 
     print(breaks_df) ####
-    print(breaks_df[breaks_df["frequency"] >= 2].to_string()) ####
+    print(breaks_df[breaks_df["freq_pair"] >= 2].to_string()) ####
 
-    res = breaks_df, breaks
+    res = (breaks_df, breaks, freqs_from, freqs_to)
     with open(out_path, "wb") as out_file:
         pickle.dump(res, out_file)
 
