@@ -18,6 +18,7 @@ def parse_seq(seq, resolution):
 def get_breaks(seqs, resolution):
     breaks = {}
     freqs_from = {}
+    freqs_to = {}
     for k, v in seqs.items():
         pts = []
         for i in v:
@@ -86,7 +87,9 @@ def breakpoints_df(in_path, out_path, resolution):
     breaks_df = get_breaks_df(breaks, freqs_from, freqs_to)
 
     print(breaks_df) ####
-    print(breaks_df[breaks_df["freq_pair"] >= 2].to_string()) ####
+    print(breaks_df[breaks_df["freq_from"] >= 2]) ####
+    print(breaks_df[breaks_df["freq_to"] >= 2]) ####
+    print(breaks_df[breaks_df["freq_pair"] >= 2]) ####
 
     res = (breaks_df, breaks, freqs_from, freqs_to)
     with open(out_path, "wb") as out_file:
