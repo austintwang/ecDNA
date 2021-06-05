@@ -12,15 +12,15 @@ def plot_facet_breaks(df, freq_col, seq_order, result_path):
         data=df, 
         x="pos_from",
         y="pos_to",
-        row="seq_from", 
-        col="seq_to", 
+        row="seq_to", 
+        col="seq_from",
         hue=freq_col, 
         row_order=reversed(seq_order), 
         col_order=seq_order, 
         hue_norm=(0,5), 
         height=5, 
         aspect=1, 
-        s=20
+        s=30
     )
     plt.savefig(result_path, bbox_inches='tight')
     plt.clf()
