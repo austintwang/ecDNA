@@ -21,9 +21,9 @@ def view_breaks(in_path, min_supports, results_dir):
     os.makedirs(facet_dir, exist_ok=True)
 
     for min_support in min_supports:
-        df_from = breaks_df["freq_from"] >= min_support
-        df_to = breaks_df["freq_to"] >= min_support
-        df_pair = breaks_df["freq_pair"] >= min_support
+        df_from = breaks_df[breaks_df["freq_from"] >= min_support]
+        df_to = breaks_df[breaks_df["freq_to"] >= min_support]
+        df_pair = breaks_df[breaks_df["freq_pair"] >= min_support]
 
         result_path_from = os.path.join(facet_dir, f"from_s_{min_support}.png")
         result_path_to = os.path.join(facet_dir, f"to_s_{min_support}.png")
