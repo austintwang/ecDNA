@@ -43,9 +43,9 @@ def get_breaks_df(breaks, freqs_from, freqs_to):
     for k, v in breaks.items():
         a, b = k
         chrom_from, strand_from, pos_from = a
-        seq_from = (chrom_from, strand_from)
+        seq_from = f"{chrom_from}, {strand_from}"
         chrom_to, strand_to, pos_to = b
-        seq_to = (chrom_to, strand_to)
+        seq_to = f"{chrom_to}, {strand_to}"
         freq_pair = v
         freq_from = freqs_from[a]
         freq_to = freqs_to[b]
