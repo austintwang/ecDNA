@@ -5,6 +5,7 @@ import pandas as pd
 import seaborn as sns
 
 def plot_facet_breaks(df, freq_col, seq_order, result_path):
+    print(df) ####
     sns.set(style="whitegrid", font="Roboto")
     sns.relplot(data=df, x="seq_from", y="seq_to", hue=freq_col, seq_order=seq_order, hue_norm=(0,10), height=3, aspect=1, s=9)
     plt.savefig(result_path, bbox_inches='tight')
