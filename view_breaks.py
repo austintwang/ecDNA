@@ -18,7 +18,7 @@ def plot_facet_breaks(df, freq_col, seq_order, result_path):
         row_order=seq_order, 
         col_order=seq_order, 
         hue_norm=(0,10), 
-        height=3, 
+        height=5, 
         aspect=1, 
         s=9
     )
@@ -26,26 +26,28 @@ def plot_facet_breaks(df, freq_col, seq_order, result_path):
     plt.clf()
     plt.close()
 
-def view_breaks(in_path, min_supports, results_dir):
+def view_breaks(in_path, min_supports, seq_sets, results_dir):
     with open(in_path, "rb") as in_file:
         breaks_df, breaks, freqs_from, freqs_to = pickle.load(in_file)
 
-    seq_order = sorted(list(set(breaks_df["seq_from"]) | set(breaks_df["seq_to"])))
+    # seq_order = sorted(list(set(breaks_df["seq_from"]) | set(breaks_df["seq_to"])))
+    # print(seq_order) ####
     facet_dir = os.path.join(results_dir, "genome_pair")
     os.makedirs(facet_dir, exist_ok=True)
 
-    for min_support in min_supports:
-        df_from = breaks_df[breaks_df["freq_from"] >= min_support]
-        df_to = breaks_df[breaks_df["freq_to"] >= min_support]
-        df_pair = breaks_df[breaks_df["freq_pair"] >= min_support]
+    for k, v in seq_sets.items():
+        for min_support in min_supports:
+            df_from = breaks_df[breaks_df["freq_from"] >= min_support]
+            df_to = breaks_df[breaks_df["freq_to"] >= min_support]
+            df_pair = breaks_df[breaks_df["freq_pair"] >= min_support]
 
-        result_path_from = os.path.join(facet_dir, f"from_s_{min_support}.png")
-        result_path_to = os.path.join(facet_dir, f"to_s_{min_support}.png")
-        result_path_pair = os.path.join(facet_dir, f"pair_s_{min_support}.png") 
+            result_path_from = os.path.join(facet_dir, f"{k}_from_s_{min_support}.svg")
+            result_path_to = os.path.join(facet_dir, f"{k}_to_s_{min_support}.svg")
+            result_path_pair = os.path.join(facet_dir, f"{k}_pair_s_{min_support}.svg") 
 
-        plot_facet_breaks(df_from, "freq_from", seq_order, result_path_from)
-        plot_facet_breaks(df_to, "freq_to", seq_order, result_path_to)
-        plot_facet_breaks(df_pair, "freq_pair", seq_order, result_path_pair)
+            plot_facet_breaks(df_from, "freq_from", v, result_path_from)
+            plot_facet_breaks(df_to, "freq_to", v, result_path_to)
+            plot_facet_breaks(df_pair, "freq_pair", v, result_path_pair)
 
 if __name__ == "__main__":
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
@@ -54,5 +56,8 @@ if __name__ == "__main__":
     results_dir = "/oak/stanford/groups/wjg/atwang/ecdna/results"
     os.makedirs(results_dir, exist_ok=True)
 
-    min_supports = [2]
-    view_breaks(in_path, min_supports, results_dir)
+    min_supports = [1, 2]
+    seq_sets = {
+        "3_8": ["NC_000003.12, +", "NC_000003.12, -", "NC_000008.11, +", "NC_000008.11, -"]
+    }
+    view_breaks(in_path, min_supports, seq_sets, results_dir)
