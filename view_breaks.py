@@ -2,6 +2,7 @@ import pickle
 import os
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 import seaborn as sns
 
 def plot_facet_breaks(df, freq_col, seq_order, result_path):
