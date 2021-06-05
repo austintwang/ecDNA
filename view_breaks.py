@@ -17,8 +17,8 @@ def plot_facet_breaks(df, freq_col, seq_order, result_path):
         hue=freq_col, 
         row_order=seq_order, 
         col_order=seq_order, 
-        hue_norm=(0,10), 
-        height=5, 
+        hue_norm=(0,5), 
+        height=3, 
         aspect=1, 
         s=9
     )
@@ -58,6 +58,6 @@ if __name__ == "__main__":
 
     min_supports = [1, 2]
     seq_sets = {
-        "3_8": ["NC_000003.12, +", "NC_000003.12, -", "NC_000008.11, +", "NC_000008.11, -"]
+        "3_8": ["NC_000008.11, -", "NC_000008.11, +", "NC_000003.12, -", "NC_000003.12, +"],
     }
     view_breaks(in_path, min_supports, seq_sets, results_dir)
