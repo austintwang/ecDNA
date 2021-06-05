@@ -10,8 +10,10 @@ def plot_facet_breaks(df, freq_col, seq_order, result_path):
     sns.set(style="whitegrid", font="Roboto")
     sns.relplot(
         data=df, 
-        x="seq_from", 
-        y="seq_to", 
+        x="pos_from",
+        y="pos_to",
+        row="seq_from", 
+        col="seq_to", 
         hue=freq_col, 
         row_order=seq_order, 
         col_order=seq_order, 
