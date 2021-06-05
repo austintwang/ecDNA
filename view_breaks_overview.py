@@ -7,7 +7,7 @@ import seaborn as sns
 
 def plot_facet_breaks(df, freq_col, seq_order, result_path):
     # print(df) ####
-    df_plot = pd.pivot_table(df, values=freq_col, index=seq_to, columns=seq_to, aggfunc=np.sum)
+    df_plot = pd.pivot_table(df, values=freq_col, index="seq_from", columns="seq_to", aggfunc=np.sum)
     sns.set(style="whitegrid", font="Roboto")
     sns.heatmap(df_plot, annot=True)
     plt.savefig(result_path, bbox_inches='tight')
