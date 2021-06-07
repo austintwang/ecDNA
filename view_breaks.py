@@ -64,7 +64,7 @@ if __name__ == "__main__":
     # }
     # view_breaks(in_path, min_supports, seq_sets, results_dir)
 
-    in_path = os.path.join(data_dir, "PC3_gDNA_combined")
+    in_path = os.path.join(data_dir, "PC3_gDNA_combined.pickle")
     results_dir = os.path.join(results_dir_base, "PC3_gDNA_combined")
     os.makedirs(results_dir, exist_ok=True)
     min_supports = [1, 2]
