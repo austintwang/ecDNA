@@ -97,6 +97,12 @@ def breakpoints_df(in_path, out_path, resolution):
             | ((breaks_df["chrom_to"] == "NC_000003.12") & (breaks_df["chrom_from"] == "NC_000008.11"))
         ) 
     ]) ####
+    print(breaks_df[
+        (breaks_df["freq_pair"] >= 2) 
+        & (
+            (breaks_df["chrom_from"] == "NC_000008.11") & (breaks_df["chrom_to"] == "NC_000008.11")
+        ) 
+    ]) ####
 
 
     res = (breaks_df, breaks, freqs_from, freqs_to)
