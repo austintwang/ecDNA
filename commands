@@ -1,0 +1,1 @@
+./minimap2 -t 4 -x map-ont /oak/stanford/groups/wjg/atwang/ecdna/data/GRCh38_latest_genomic.fna /oak/stanford/groups/wjg/atwang/ecdna/data/PC3_gDNA_combined.fastq > /oak/stanford/groups/wjg/atwang/ecdna/data/PC3_gDNA_combined_map.paf

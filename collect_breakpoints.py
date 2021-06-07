@@ -45,9 +45,16 @@ def get_breakpoints(paf_path, out_path, out_path_all, q_cutoff):
 
 if __name__ == "__main__":
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
-    paf_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_map.paf")
-    out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_splits.pickle")
-    out_path_all = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_all.pickle")
-
     q_cutoff = 50
+
+    # paf_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_map.paf")
+    # out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_splits.pickle")
+    # out_path_all = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_all.pickle")
+
+    # get_breakpoints(paf_path, out_path, out_path_all, q_cutoff)
+
+    paf_path = os.path.join(data_dir, "PC3_gDNA_combined_map.paf")
+    out_path = os.path.join(data_dir, "PC3_gDNA_combined_splits.pickle")
+    out_path_all = os.path.join(data_dir, "PC3_gDNA_combined_all.pickle")
+
     get_breakpoints(paf_path, out_path, out_path_all, q_cutoff)
