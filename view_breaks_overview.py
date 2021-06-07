@@ -39,10 +39,15 @@ def view_breaks(in_path, min_supports, results_dir):
 
 if __name__ == "__main__":
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
-    in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_breaks_proc.pickle")
 
-    results_dir = "/oak/stanford/groups/wjg/atwang/ecdna/results"
+    # in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_breaks_proc.pickle")
+    # results_dir = "/oak/stanford/groups/wjg/atwang/ecdna/results/COLO320DM_gDNA_nanopore_guppy_4.4"
+    # os.makedirs(results_dir, exist_ok=True)
+    # min_supports = [1, 2]
+    # view_breaks(in_path, min_supports, results_dir)
+
+    in_path = os.path.join(data_dir, "PC3_gDNA_combined_breaks_proc.pickle")
+    results_dir = "/oak/stanford/groups/wjg/atwang/ecdna/results/PC3_gDNA_combined"
     os.makedirs(results_dir, exist_ok=True)
-
     min_supports = [1, 2]
     view_breaks(in_path, min_supports, results_dir)
