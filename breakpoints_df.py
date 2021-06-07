@@ -90,26 +90,26 @@ def breakpoints_df(in_path, out_path, resolution):
     print(breaks_df[breaks_df["freq_from"] >= 2]) ####
     print(breaks_df[breaks_df["freq_to"] >= 2]) ####
     print(breaks_df[breaks_df["freq_pair"] >= 2]) ####
-    print(breaks_df[
-        (breaks_df["freq_pair"] >= 2) 
-        & (
-            ((breaks_df["chrom_from"] == "NC_000003.12") & (breaks_df["chrom_to"] == "NC_000008.11"))
-            | ((breaks_df["chrom_to"] == "NC_000003.12") & (breaks_df["chrom_from"] == "NC_000008.11"))
-        ) 
-    ]) ####
-    print(breaks_df[
-        (breaks_df["freq_pair"] >= 2) 
-        & (
-            (breaks_df["chrom_from"] == "NC_000008.11") & (breaks_df["chrom_to"] == "NC_000008.11")
-        ) 
-    ]) ####
-    print(breaks_df[
-        (breaks_df["freq_pair"] >= 2) 
-        & (
-            ((breaks_df["chrom_from"] == "NC_000003.12") & (breaks_df["chrom_to"] == "NW_021160026.1"))
-            | ((breaks_df["chrom_to"] == "NC_000003.12") & (breaks_df["chrom_from"] == "NW_021160026.1"))
-        ) 
-    ]) ####
+    # print(breaks_df[
+    #     (breaks_df["freq_pair"] >= 2) 
+    #     & (
+    #         ((breaks_df["chrom_from"] == "NC_000003.12") & (breaks_df["chrom_to"] == "NC_000008.11"))
+    #         | ((breaks_df["chrom_to"] == "NC_000003.12") & (breaks_df["chrom_from"] == "NC_000008.11"))
+    #     ) 
+    # ]) ####
+    # print(breaks_df[
+    #     (breaks_df["freq_pair"] >= 2) 
+    #     & (
+    #         (breaks_df["chrom_from"] == "NC_000008.11") & (breaks_df["chrom_to"] == "NC_000008.11")
+    #     ) 
+    # ]) ####
+    # print(breaks_df[
+    #     (breaks_df["freq_pair"] >= 2) 
+    #     & (
+    #         ((breaks_df["chrom_from"] == "NC_000003.12") & (breaks_df["chrom_to"] == "NW_021160026.1"))
+    #         | ((breaks_df["chrom_to"] == "NC_000003.12") & (breaks_df["chrom_from"] == "NW_021160026.1"))
+    #     ) 
+    # ]) ####
 
 
     res = (breaks_df, breaks, freqs_from, freqs_to)
@@ -117,9 +117,15 @@ def breakpoints_df(in_path, out_path, resolution):
         pickle.dump(res, out_file)
 
 if __name__ == "__main__":
-    data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
-    in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_splits.pickle")
-    out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_breaks_proc.pickle")
-
     resolution = 1e3
+    data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
+
+    # in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_splits.pickle")
+    # out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_breaks_proc.pickle")
+
+    # breakpoints_df(in_path, out_path, resolution)
+
+    in_path = os.path.join(data_dir, "PC3_gDNA_combined_splits.pickle")
+    out_path = os.path.join(data_dir, "PC3_gDNA_combined_breaks_proc.pickle")
+
     breakpoints_df(in_path, out_path, resolution)
