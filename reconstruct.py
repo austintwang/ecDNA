@@ -58,7 +58,7 @@ def merge_seqs(seqs, points, ranks, resolution):
 
         seq_pts = []
         for i in v:
-            start_pt, end_pt = parse_seq(i, resolution)
+            start_pt, end_pt, start_pt_rc, end_pt_rc = parse_seq(i, resolution)
             start_idx = ranks[start_pt]
             end_idx = ranks[end_pt]
             seq_pts.extend(points[start_idx:end_idx])
@@ -181,6 +181,7 @@ def reconstruct_amplicons(in_path, out_path, resolution):
         seqs, lens = pickle.load(in_file)
 
     points, ranks = parse_points(seqs, resolution)
+    print(len(points)) ####
     copy_num, seqs_break, seqs_break_start, seqs_break_end = merge_seqs(seqs, points, ranks, resolution)
     print(copy_num[:10]) ####
     node_data, edge_data = build_graph(points, copy_num, seqs_break, seqs_break_start, seqs_break_end)
