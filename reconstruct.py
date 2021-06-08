@@ -88,6 +88,7 @@ def build_graph(points, copy_num, seqs_break, seqs_break_start, seqs_break_end):
     pt_block_map = {}
     block_ind = 0
     no_cov_ind, = np.nonzero(copy_num == 0)
+    print(no_cov_ind) ####
     for i in range(1, no_cov_ind.size):
         a = no_cov_ind[i-1] + 1
         b = no_cov_ind[i]
@@ -104,7 +105,7 @@ def build_graph(points, copy_num, seqs_break, seqs_break_start, seqs_break_end):
 
         block_ind += 1
 
-    print(pt_block_map) ####
+    # print(pt_block_map) ####
     block_break_fwd = [{} for _ in range(len(blocks))]
     break_block_bwd = {}
     for k, v in seqs_break_start.items():
