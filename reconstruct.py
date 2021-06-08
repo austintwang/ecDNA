@@ -70,6 +70,8 @@ def merge_seqs(seqs, points, ranks, resolution):
             copy_num[start_idx_rc] += 1
             copy_num[end_idx_rc] += 1
         seqs_break[k] = seq_pts
+        if len(seq_pts) == 0:
+            print(v) ####
         seqs_break_start.setdefault(seq_pts[0], []).append(k)
         seqs_break_end.setdefault(seq_pts[-1], []).append(k)
 
