@@ -203,7 +203,7 @@ def reconstruct_amplicons(in_path, out_path, resolution):
         pickle.dump(res, out_file)
 
 if __name__ == "__main__":
-    resolution = 1e3
+    resolution = 1e2
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
 
     # in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_all.pickle")
