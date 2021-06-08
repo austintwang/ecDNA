@@ -166,6 +166,7 @@ def prune_graph(node_data, edge_data):
         consider_set = consider_set_next - delete_node_set
         print(len(consider_set_next)) ####
         print(len(delete_node_set)) ####
+        print(len(delete_edge_set)) ####
         print(len(consider_set)) ####
         for n in delete_node_set:
             blocks_p.pop(n)
@@ -205,7 +206,7 @@ def reconstruct_amplicons(in_path, out_path, resolution):
     print(len(node_data[0])) ####
     node_data_p, edge_data_p = prune_graph(node_data, edge_data)
     print(len(node_data_p[0])) ####
-    coarse_edges = create_coarse_grained(node_data, edge_data)
+    coarse_edges = create_coarse_grained(node_data_p, edge_data_p)
     print(len(coarse_edges)) ####
 
     res = (node_data_p, edge_data_p, coarse_edges)
