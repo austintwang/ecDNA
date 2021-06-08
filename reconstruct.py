@@ -30,7 +30,7 @@ def parse_points(seqs, resolution):
             # adj.add((start_pt, end_pt),)
 
     points = sorted(points_set)
-    ranks = {val: ind for ind, val in points}
+    ranks = {val: ind for ind, val in enumerate(points)}
 
     return points, ranks
 
