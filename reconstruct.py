@@ -196,7 +196,7 @@ def create_coarse_grained(node_data, edge_data):
         for br, _ in break_data:
             nxt = break_block_fwd[br][0]
             edge = (k, nxt)
-            coarse_edges.setdefault(edge)
+            coarse_edges.setdefault(edge, 0)
             coarse_edges[edge] += 1
 
     return coarse_edges
