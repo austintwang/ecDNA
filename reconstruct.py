@@ -7,7 +7,7 @@ def parse_seq(seq, resolution):
     try: ####
         strand = seq[2]
     except Exception as e: ####
-        print(strand) ####
+        print(seq) ####
         raise e ####
     chrom = seq[3]
     start = seq[4]
