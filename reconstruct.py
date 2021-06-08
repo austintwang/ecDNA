@@ -226,12 +226,12 @@ if __name__ == "__main__":
     resolution = 1e2
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
 
-    # in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_all.pickle")
-    # out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_graph.pickle")
+    in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_all.pickle")
+    out_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_graph.pickle")
 
-    # breakpoints_df(in_path, out_path, resolution)
+    reconstruct_amplicons(in_path, out_path, resolution)
 
-    in_path = os.path.join(data_dir, "PC3_gDNA_combined_all.pickle")
-    out_path = os.path.join(data_dir, "PC3_gDNA_combined_graph.pickle")
+    # in_path = os.path.join(data_dir, "PC3_gDNA_combined_all.pickle")
+    # out_path = os.path.join(data_dir, "PC3_gDNA_combined_graph.pickle")
 
     reconstruct_amplicons(in_path, out_path, resolution)
