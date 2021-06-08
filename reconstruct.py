@@ -143,6 +143,7 @@ def prune_graph(node_data, edge_data):
 
     consider_set = set(range(len(blocks)))
     while consider_set:
+        print("a") ####
         consider_set_next = set()
         delete_node_set = set()
         delete_edge_set = set()
