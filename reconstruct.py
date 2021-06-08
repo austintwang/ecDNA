@@ -159,8 +159,8 @@ def prune_graph(node_data, edge_data):
             delete_node_set.add(i)
             delete_edge_set |= (inbounds | outbounds)
 
-            in_consider = set(break_block_bwd_p[i] for i in in_deletes)
-            out_consider = set(break_block_fwd_p[i] for i in out_deletes)
+            in_consider = set(break_block_bwd_p[i] for i in inbounds)
+            out_consider = set(break_block_fwd_p[i] for i in outbounds)
             consider_set_next |= (in_consider | out_consider)
 
         consider_set = consider_set_next - delete_node_set
