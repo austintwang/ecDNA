@@ -66,19 +66,25 @@ def merge_seqs(seqs, points, ranks, resolution):
             start_idx = ranks[start_pt]
             end_idx = ranks[end_pt]
             # print(start_idx, end_idx) ####
-            seq_pts.extend(points[start_idx:end_idx])
+            seq_pts.extend(points[start_idx:end_idx+1])
             copy_num[start_idx] += 1
             copy_num[end_idx] += 1
             start_idx_rc = ranks[start_pt_rc]
             end_idx_rc = ranks[end_pt_rc]
-            seq_pts_rc.extend(points[start_idx_rc:end_idx_rc])
+            seq_pts_rc.extend(points[start_idx_rc:end_idx_rc+1])
             copy_num[start_idx_rc] += 1
             copy_num[end_idx_rc] += 1
-        seqs_break[k] = (seq_pts, seq_pts_rc)
+        
+        k_rc = k + "_rc"
+        seqs_break[k] = seq_pts
+        seqs_break[k_rc] = seq_pts_rc
         # if len(seq_pts) == 0:
             # print(v, len(seqs_break)) ####
         seqs_break_start.setdefault(seq_pts[0], []).append(k)
         seqs_break_end.setdefault(seq_pts[-1], []).append(k)
+
+        seqs_break_start.setdefault(seq_pts_rc[0], []).append(k_rc)
+        seqs_break_end.setdefault(seq_pts_rc[-1], []).append(k_rc)
 
     return copy_num, seqs_break, seqs_break_start, seqs_break_end
 
@@ -88,7 +94,7 @@ def build_graph(points, copy_num, seqs_break, seqs_break_start, seqs_break_end):
     pt_block_map = {}
     block_ind = 0
     no_cov_ind, = np.nonzero(copy_num == 0)
-    print(no_cov_ind) ####
+    # print(no_cov_ind) ####
     for i in range(1, no_cov_ind.size):
         a = no_cov_ind[i-1] + 1
         b = no_cov_ind[i]
