@@ -3,6 +3,7 @@ import os
 import numpy as np
 
 def parse_seq(seq, resolution):
+    print(seq) ####
     strand = seq[2]
     chrom = seq[3]
     start = seq[4]
