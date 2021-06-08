@@ -112,19 +112,23 @@ def build_graph(points, copy_num, seqs_break, seqs_break_start, seqs_break_end):
         block_ind += 1
 
     # print(pt_block_map) ####
-    block_break_fwd = [{} for _ in range(len(blocks))]
+    block_break_fwd = [[] for _ in range(len(blocks))]
     break_block_bwd = {}
     for k, v in seqs_break_start.items():
         block = pt_block_map[k]
-        block_break_fwd[block][k] = v
-        break_block_bwd[k] = block
+        # block_break_fwd[block][k] = v
+        for z in v:
+            block_break_fwd[block].append((z, k),)
+            break_block_bwd[z] = block, k
 
-    block_break_bwd = [{} for _ in range(len(blocks))]
+    block_break_bwd = [[] for _ in range(len(blocks))]
     break_block_fwd = {}
     for k, v in seqs_break_end.items():
         block = pt_block_map[k]
-        block_break_bwd[block][k] = v
-        break_block_fwd[k] = block
+        # block_break_bwd[block][k] = v
+        for z in v:
+            block_break_bwd[block].append((z, k),)
+            break_block_fwd[z] = block, k
     
     node_data = (blocks, blocks_cn, pt_block_map)
     edge_data = (block_break_fwd, block_break_bwd, break_block_fwd, break_block_bwd)
@@ -148,12 +152,12 @@ def prune_graph(node_data, edge_data):
         delete_node_set = set()
         delete_edge_set = set()
         for i in consider_set:
-            inbounds = set(j for j in block_break_bwd_p[i].keys() if j in break_block_bwd_p)
-            outbounds = set(j for j in block_break_fwd_p[i].keys() if j in break_block_fwd_p)
+            inbounds = set(j[0] for j in block_break_bwd_p[i] if j[0] in break_block_bwd_p)
+            outbounds = set(j[0] for j in block_break_fwd_p[i] if j[0] in break_block_fwd_p)
             if inbounds and outbounds:
-                print(inbounds, outbounds) ####
-                min_inbound = min(inbounds)
-                max_outbound = max(outbounds)
+                # print(inbounds, outbounds) ####
+                min_inbound = min(j[1] for j in block_break_bwd_p[i] if j[0] in break_block_bwd_p)
+                max_outbound = max(j[1] for j in block_break_fwd_p[i] if j[0] in break_block_fwd_p)
                 if max_outbound >= min_inbound:
                     continue
 
