@@ -4,11 +4,11 @@ import numpy as np
 
 def parse_seq(seq, resolution):
     # print(seq) ####
-    try: ####
-        strand = seq[2]
-    except Exception as e: ####
-        print(seq) ####
-        raise e ####
+    # try: ####
+    strand = seq[2]
+    # except Exception as e: ####
+    #     print(seq) ####
+    #     raise e ####
     chrom = seq[3]
     start = seq[4]
     end = seq[5]
@@ -46,7 +46,7 @@ def merge_seqs(seqs, points, ranks, resolution):
     seqs_break_end = {}
     for k, v in seqs.items():
         if len(v) == 1:
-            i = v,
+            i, = v
             start_pt, end_pt, start_pt_rc, end_pt_rc = parse_seq(i, resolution)
             start_idx = ranks[start_pt]
             end_idx = ranks[end_pt]
