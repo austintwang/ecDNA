@@ -15,11 +15,13 @@ def parse_seq(seq, resolution):
     strand_sgn = 1 if strand == "+" else -1
     start_bucket = int(start // resolution) * resolution * strand_sgn
     end_bucket = int(end // resolution) * resolution * strand_sgn
+    if strand_sgn == -1:
+        start_bucket, end_bucket = end_bucket, start_bucket
     start_pt = (chrom, strand, start_bucket)
     end_pt = (chrom, strand, end_bucket)
     strand_rc = "-" if strand == "+" else "+"
-    start_pt_rc = (chrom, strand, end_bucket * -1)
-    end_pt_rc = (chrom, strand, start_bucket * -1)
+    start_pt_rc = (chrom, strand_rc, end_bucket * -1)
+    end_pt_rc = (chrom, strand_rc, start_bucket * -1)
     return start_pt, end_pt, start_pt_rc, end_pt_rc
 
 def parse_points(seqs, resolution):
@@ -60,10 +62,10 @@ def merge_seqs(seqs, points, ranks, resolution):
         seq_pts_rc = []
         for i in v:
             start_pt, end_pt, start_pt_rc, end_pt_rc = parse_seq(i, resolution)
-            print(start_pt, end_pt, start_pt_rc, end_pt_rc) ####
+            # print(start_pt, end_pt, start_pt_rc, end_pt_rc) ####
             start_idx = ranks[start_pt]
             end_idx = ranks[end_pt]
-            print(start_idx, end_idx) ####
+            # print(start_idx, end_idx) ####
             seq_pts.extend(points[start_idx:end_idx])
             copy_num[start_idx] += 1
             copy_num[end_idx] += 1
