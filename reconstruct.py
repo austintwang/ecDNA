@@ -201,4 +201,4 @@ if __name__ == "__main__":
     in_path = os.path.join(data_dir, "PC3_gDNA_combined_all.pickle")
     out_path = os.path.join(data_dir, "PC3_gDNA_combined_graph.pickle")
 
-    breakpoints_df(in_path, out_path, resolution)
+    reconstruct_amplicons(in_path, out_path, resolution)
