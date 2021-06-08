@@ -166,9 +166,9 @@ def prune_graph(node_data, edge_data):
             consider_set_next |= (in_consider | out_consider)
 
         consider_set = consider_set_next - delete_node_set
-        # print(len(consider_set_next)) ####
-        # print(len(delete_node_set)) ####
-        # print(len(consider_set)) ####
+        print(len(consider_set_next)) ####
+        print(len(delete_node_set)) ####
+        print(len(consider_set)) ####
         for n in delete_node_set:
             blocks_p.pop(n)
             blocks_cn_p.pop(n)
