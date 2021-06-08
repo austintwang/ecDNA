@@ -95,9 +95,17 @@ def build_graph(points, copy_num, seqs_break, seqs_break_start, seqs_break_end):
     block_ind = 0
     no_cov_ind, = np.nonzero(copy_num == 0)
     # print(no_cov_ind) ####
-    for i in range(1, no_cov_ind.size):
-        a = no_cov_ind[i-1] + 1
-        b = no_cov_ind[i]
+    end = no_cov_ind.size
+    for i in range(0, end + 1):
+        if i == 0:
+            a = 0
+            b = no_cov_ind[0]
+        elif i == end:
+            a = no_cov_ind[-1] + 1
+            b = len(points)
+        else:
+            a = no_cov_ind[i-1] + 1
+            b = no_cov_ind[i]
         if a == b:
             continue
 
