@@ -57,6 +57,7 @@ def merge_seqs(seqs, points, ranks, resolution):
             continue
 
         seq_pts = []
+        seq_pts_rc = []
         for i in v:
             start_pt, end_pt, start_pt_rc, end_pt_rc = parse_seq(i, resolution)
             start_idx = ranks[start_pt]
@@ -66,12 +67,12 @@ def merge_seqs(seqs, points, ranks, resolution):
             copy_num[end_idx] += 1
             start_idx_rc = ranks[start_pt_rc]
             end_idx_rc = ranks[end_pt_rc]
-            seq_pts.extend(points[start_idx_rc:end_idx_rc])
+            seq_pts_rc.extend(points[start_idx_rc:end_idx_rc])
             copy_num[start_idx_rc] += 1
             copy_num[end_idx_rc] += 1
-        seqs_break[k] = seq_pts
+        seqs_break[k] = (seq_pts, seq_pts_rc)
         if len(seq_pts) == 0:
-            print(v) ####
+            print(v, len(seq_break)) ####
         seqs_break_start.setdefault(seq_pts[0], []).append(k)
         seqs_break_end.setdefault(seq_pts[-1], []).append(k)
 
