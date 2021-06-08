@@ -138,8 +138,8 @@ def prune_graph(node_data, edge_data):
     block_break_fwd, block_break_bwd, break_block_fwd, break_block_bwd = edge_data
     block_break_fwd_p = dict(enumerate(block_break_fwd))
     block_break_bwd_p = dict(enumerate(block_break_bwd))
-    break_block_fwd_p = copy(break_block_fwd)
-    break_block_bwd_p = copy(break_block_bwd)
+    break_block_fwd_p = break_block_fwd.copy()
+    break_block_bwd_p = break_block_bwd.copy()
 
     consider_set = set(range(len(blocks)))
     while consider_set:
@@ -200,9 +200,9 @@ def reconstruct_amplicons(in_path, out_path, resolution):
     copy_num, seqs_break, seqs_break_start, seqs_break_end = merge_seqs(seqs, points, ranks, resolution)
     print(copy_num[:10]) ####
     node_data, edge_data = build_graph(points, copy_num, seqs_break, seqs_break_start, seqs_break_end)
-    print(len(node_data)) ####
+    print(len(node_data[0])) ####
     node_data_p, edge_data_p = prune_graph(node_data, edge_data)
-    print(len(node_data_p)) ####
+    print(len(node_data_p[0])) ####
     coarse_edges = create_coarse_grained(node_data, edge_data)
     print(len(coarse_edges)) ####
 
