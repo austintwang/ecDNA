@@ -151,6 +151,7 @@ def prune_graph(node_data, edge_data):
             inbounds = set(j for j in block_break_bwd_p[i].keys() if j in break_block_bwd_p)
             outbounds = set(j for j in block_break_fwd_p[i].keys() if j in break_block_fwd_p)
             if inbounds and outbounds:
+                print(inbounds, outbounds) ####
                 min_inbound = min(inbounds)
                 max_outbound = max(outbounds)
                 if max_outbound >= min_inbound:
