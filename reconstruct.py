@@ -104,6 +104,7 @@ def build_graph(points, copy_num, seqs_break, seqs_break_start, seqs_break_end):
 
         block_ind += 1
 
+    print(pt_block_map) ####
     block_break_fwd = [{} for _ in range(len(blocks))]
     break_block_bwd = {}
     for k, v in seqs_break_start.items():
