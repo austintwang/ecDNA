@@ -78,7 +78,7 @@ def view_graph_coarse(in_path, results_dir):
     plot_dir = os.path.join(results_dir, "graph")
     os.makedirs(plot_dir, exist_ok=True)
     for ind, c in enumerate(components):
-        if c <= 1:
+        if len(c) <= 1:
             continue
         print(len(c)) ####
         result_path = os.path.join(results_dir, f"coarse_{ind:02d}.svg")
