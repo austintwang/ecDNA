@@ -9,7 +9,7 @@ def plot_component(graph, comp, result_path):
     G = graph.subgraph(comp)
     pos = nx.spectral_layout(G)
     node_len_dict = nx.get_node_attributes(G, "len")
-    node_sizes = [node_len_dict[i] / 1e3 for i in G.nodes()]
+    node_sizes = [node_len_dict[i] / 1e4 for i in G.nodes()]
     edge_weight_dict = nx.get_edge_attributes(G, "freq")
     edge_colors = [edge_weight_dict[i] for i in G.edges()]
     node_labels = nx.get_node_attributes(G, "range")
@@ -32,7 +32,7 @@ def plot_component(graph, comp, result_path):
         edge_cmap=cmap,
         width=2,
         edge_vmin=0,
-        edge_vmax=None
+        edge_vmax=10
     )
     labels = nx.draw_networkx_labels(
         G, 
