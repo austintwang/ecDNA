@@ -77,7 +77,7 @@ def view_graph_coarse(in_path, results_dir):
 
     components = nx.weakly_connected_components(graph)
     
-    plot_dir = os.path.join(results_dir, "graph")
+    plot_dir = os.path.join(results_dir, "graph2")
     os.makedirs(plot_dir, exist_ok=True)
     for ind, c in enumerate(components):
         if len(c) <= 2:
