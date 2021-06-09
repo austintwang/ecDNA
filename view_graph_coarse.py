@@ -82,7 +82,7 @@ def view_graph_coarse(in_path, results_dir):
         if len(c) <= 2:
             continue
         print(len(c)) ####
-        result_path = os.path.join(results_dir, f"coarse_{ind:02d}.svg")
+        result_path = os.path.join(plot_dir, f"coarse_{ind:02d}.svg")
         plot_component(graph, c, result_path)
 
 if __name__ == "__main__":
