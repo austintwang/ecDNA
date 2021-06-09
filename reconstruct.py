@@ -155,7 +155,7 @@ def prune_graph(node_data, edge_data):
 
     consider_set = set(range(len(blocks)))
     while consider_set:
-        print(f"P {len(blocks_p)}") ####
+        print(f"N {len(blocks_p)}, E {len(break_block_fwd_p)}") ####
         consider_set_next = set()
         delete_node_set = set()
         delete_edge_set = set()
@@ -167,13 +167,27 @@ def prune_graph(node_data, edge_data):
                 min_inbound = min(j[1] for j in block_break_bwd_p[i] if j[0] in break_block_bwd_p)
                 max_outbound = max(j[1] for j in block_break_fwd_p[i] if j[0] in break_block_fwd_p)
                 if max_outbound >= min_inbound:
-                    continue
+                    in_ext = set(j for j in inbounds if break_block_bwd_p[j][0] != i)
+                    out_ext = set(j for j in outbounds if break_block_fwd_p[j][0] != i)
+                    if bool(in_ext) == bool(out_ext):
+                        continue
+                    else:
+                        delete_node = False
+                else:
+                    delete_node = True
+            else:
+                delete_node = True
 
-            delete_node_set.add(i)
-            delete_edge_set |= (inbounds | outbounds)
-
-            in_consider = set(break_block_bwd_p[i][0] for i in inbounds)
-            out_consider = set(break_block_fwd_p[i][0] for i in outbounds)
+            if delete_node:
+                delete_node_set.add(i)
+                delete_edge_set |= (inbounds | outbounds)
+                in_consider = set(break_block_bwd_p[i][0] for i in inbounds)
+                out_consider = set(break_block_fwd_p[i][0] for i in outbounds)
+            else:
+                delete_edge_set |= (in_ext | out_ext)
+                in_consider = set(break_block_bwd_p[i][0] for i in in_ext)
+                out_consider = set(break_block_fwd_p[i][0] for i in out_ext)
+                
             consider_set_next |= (in_consider | out_consider)
 
         consider_set = consider_set_next - delete_node_set
@@ -189,6 +203,8 @@ def prune_graph(node_data, edge_data):
         for e in delete_edge_set:
             break_block_fwd_p.pop(e)
             break_block_bwd_p.pop(e)
+
+    print(f"N {len(blocks_p)}, E {len(break_block_fwd_p)}") ####
 
     node_data = (blocks_p, blocks_cn_p, pt_block_map)
     edge_data = (block_break_fwd_p, block_break_bwd_p, break_block_fwd_p, break_block_bwd_p)
