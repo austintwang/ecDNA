@@ -93,7 +93,7 @@ if __name__ == "__main__":
     os.makedirs(results_dir, exist_ok=True)
     view_graph_coarse(in_path, results_dir)
 
-    in_path = os.path.join(data_dir, "PC3_gDNA_combined_breaks_graph.pickle")
+    in_path = os.path.join(data_dir, "PC3_gDNA_combined_graph.pickle")
     results_dir = os.path.join(results_dir_base, "PC3_gDNA_combined")
     os.makedirs(results_dir, exist_ok=True)
     view_graph_coarse(in_path, results_dir)
