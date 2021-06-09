@@ -62,7 +62,7 @@ def view_graph_coarse(in_path, results_dir):
     for k, v in blocks.items():
         start = v[0]
         end = v[-1]
-        chrom = CHROM_MAP[start[0]]
+        chrom = CHROM_MAP.get(start[0], start[0])
         strand = start[1]
         block_len = abs(start[2] - end[2])
         block_range = f"{chrom}{strand} {abs(int(start[2]))}:{abs(int(end[2]))}"
