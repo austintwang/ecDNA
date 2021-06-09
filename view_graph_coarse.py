@@ -5,7 +5,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def plot_component(graph, comp, result_path):
+def plot_component(graph, comp, result_path, result_path_nl):
     G = graph.subgraph(comp)
     pos = nx.spring_layout(G)
     node_len_dict = nx.get_node_attributes(G, "len")
@@ -34,13 +34,14 @@ def plot_component(graph, comp, result_path):
         edge_vmin=0,
         edge_vmax=5
     )
+    plt.savefig(result_path_nl, bbox_inches='tight')
+
     labels = nx.draw_networkx_labels(
         G, 
         pos, 
         labels=node_labels, 
         font_size=8
     )
-
     plt.savefig(result_path, bbox_inches='tight')
     plt.clf()
     plt.close()
@@ -83,7 +84,8 @@ def view_graph_coarse(in_path, results_dir):
             continue
         print(len(c)) ####
         result_path = os.path.join(plot_dir, f"coarse_{ind:02d}.svg")
-        plot_component(graph, c, result_path)
+        result_path_nl = os.path.join(plot_dir, f"coarse_{ind:02d}_nl.svg")
+        plot_component(graph, c, result_path, result_path_nl)
 
 if __name__ == "__main__":
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
