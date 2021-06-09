@@ -9,7 +9,7 @@ CHROM_MAP_PATH = "GRCh38_RefSeq2UCSC.txt"
 CHROM_MAP = {}
 with open(CHROM_MAP_PATH) as f:
     for l in f:
-        seq, chrom = l.strip.split()
+        seq, chrom = l.strip().split()
         CHROM_MAP[seq] = chrom
 
 def plot_facet_breaks(df, freq_col, seq_order, result_path):
