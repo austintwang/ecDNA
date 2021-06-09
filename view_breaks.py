@@ -54,15 +54,16 @@ if __name__ == "__main__":
 
     results_dir_base = "/oak/stanford/groups/wjg/atwang/ecdna/results"
 
-    # in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_breaks_proc.pickle")
-    # results_dir = os.path.join(results_dir_base, "COLO320DM_gDNA_nanopore_guppy_4.4")
-    # os.makedirs(results_dir, exist_ok=True)
-    # min_supports = [1, 2]
-    # seq_sets = {
-    #     # "3_8": ["NC_000003.12, +", "NC_000003.12, -", "NC_000008.11, +", "NC_000008.11, -"],
-    #     "3_22P": ["NC_000003.12, +", "NC_000003.12, -", "NW_021160026.1, +", "NW_021160026.1, -"]
-    # }
-    # view_breaks(in_path, min_supports, seq_sets, results_dir)
+    in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_breaks_proc.pickle")
+    results_dir = os.path.join(results_dir_base, "COLO320DM_gDNA_nanopore_guppy_4.4")
+    os.makedirs(results_dir, exist_ok=True)
+    min_supports = [1, 2]
+    seq_sets = {
+        # "3_8": ["NC_000003.12, +", "NC_000003.12, -", "NC_000008.11, +", "NC_000008.11, -"],
+        # "3_22P": ["NC_000003.12, +", "NC_000003.12, -", "NW_021160026.1, +", "NW_021160026.1, -"],
+        "8": ["NC_000008.11, +", "NC_000008.11, -"],
+    }
+    view_breaks(in_path, min_supports, seq_sets, results_dir)
 
     in_path = os.path.join(data_dir, "PC3_gDNA_combined_breaks_proc.pickle")
     results_dir = os.path.join(results_dir_base, "PC3_gDNA_combined")
@@ -71,4 +72,4 @@ if __name__ == "__main__":
     seq_sets = {
         "8": ["NC_000008.11, +", "NC_000008.11, -"],
     }
-    view_breaks(in_path, min_supports, seq_sets, results_dir)
+    # view_breaks(in_path, min_supports, seq_sets, results_dir)
