@@ -7,7 +7,7 @@ import seaborn as sns
 
 def plot_component(graph, comp, result_path):
     G = graph.subgraph(comp)
-    pos = nx.circular_layout(G)
+    pos = nx.spring_layout(G)
     node_len_dict = nx.get_node_attributes(G, "len")
     node_sizes = [node_len_dict[i] / 1e4 for i in G.nodes()]
     edge_weight_dict = nx.get_edge_attributes(G, "freq")
