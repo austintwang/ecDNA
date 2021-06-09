@@ -68,6 +68,7 @@ def view_graph_coarse(in_path, results_dir):
     graph = nx.DiGraph()
     graph.add_nodes_from(nodelist)
     graph.add_edges_from(edgelist)
+    print(graph) ####
 
     components = nx.weakly_connected_components(graph)
     
