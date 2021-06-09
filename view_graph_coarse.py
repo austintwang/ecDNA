@@ -8,7 +8,7 @@ import seaborn as sns
 def plot_component(G, result_path):
     pos = nx.spring_layout(G)
     node_len_dict = nx.get_node_attributes(G, "len")
-    node_sizes = [node_len_dict[i] / 1e6 for i in G.nodes()]
+    node_sizes = [node_len_dict[i] / 1e3 for i in G.nodes()]
     edge_weight_dict = nx.get_edge_attributes(G, "freq")
     edge_colors = [edge_weight_dict[i] for i in G.edges()]
     node_labels = nx.get_node_attributes(G, "range")
@@ -65,20 +65,22 @@ def view_graph_coarse(in_path, results_dir):
         data = (k[0], k[1], {"freq": v})
         edgelist.append(data)
 
-    print(nodelist) ####
-    print(edgelist) ####
-    
+    # print(nodelist) ####
+    # print(edgelist) ####
+
     graph = nx.DiGraph()
     graph.add_nodes_from(nodelist)
     graph.add_edges_from(edgelist)
-    print(graph) ####
+    # print(graph) ####
 
     components = nx.weakly_connected_components(graph)
     
     plot_dir = os.path.join(results_dir, "graph")
     os.makedirs(plot_dir, exist_ok=True)
     for ind, c in enumerate(components):
-        # print(len(c)) ####
+        if c <= 1:
+            continue
+        print(len(c)) ####
         result_path = os.path.join(results_dir, f"coarse_{ind:02d}.svg")
 
 if __name__ == "__main__":
