@@ -75,7 +75,7 @@ def view_graph_coarse(in_path, results_dir):
     os.makedirs(plot_dir, exist_ok=True)
     for ind, c in enumerate(components):
         print(len(c)) ####
-        result_path = os.path.join(results_dir, f"coarse_{c:02d}.svg")
+        result_path = os.path.join(results_dir, f"coarse_{ind:02d}.svg")
 
 if __name__ == "__main__":
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
