@@ -31,8 +31,8 @@ def plot_component(graph, comp, result_path):
         edge_color=edge_colors,
         edge_cmap=cmap,
         width=2,
-        vmin=0,
-        vmax=None
+        edge_vmin=0,
+        edge_vmax=None
     )
     labels = nx.draw_networkx_labels(
         G, 
