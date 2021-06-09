@@ -65,6 +65,9 @@ def view_graph_coarse(in_path, results_dir):
         data = (k[0], k[1], {"freq": v})
         edgelist.append(data)
 
+    print(nodelist) ####
+    print(edgelist) ####
+    
     graph = nx.DiGraph()
     graph.add_nodes_from(nodelist)
     graph.add_edges_from(edgelist)
