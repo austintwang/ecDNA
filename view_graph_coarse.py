@@ -5,6 +5,13 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+CHROM_MAP_PATH = "GRCh38_RefSeq2UCSC.txt"
+CHROM_MAP = {}
+with open(CHROM_MAP_PATH) as f:
+    for l in f:
+        seq, chrom = l.strip.split()
+        CHROM_MAP[seq] = chrom
+
 def plot_component(graph, comp, result_path, result_path_nl):
     G = graph.subgraph(comp)
     pos = nx.kamada_kawai_layout(G)
@@ -55,7 +62,7 @@ def view_graph_coarse(in_path, results_dir):
     for k, v in blocks.items():
         start = v[0]
         end = v[-1]
-        chrom = start[0]
+        chrom = CHROM_MAP[start[0]]
         strand = start[1]
         block_len = abs(start[2] - end[2])
         block_range = f"{chrom}{strand} {abs(int(start[2]))}:{abs(int(end[2]))}"
