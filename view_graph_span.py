@@ -78,7 +78,7 @@ def view_graph_span(in_path, results_dir):
         freqs[len(c)] += 1 ####
         if len(c) <= 2:
             continue
-        print(len(c)) ####
+        # print(len(c)) ####
         result_path = os.path.join(plot_dir, f"span_{ind:02d}.svg")
         result_path_nl = os.path.join(plot_dir, f"span_{ind:02d}_nl.svg")
         # plot_component(graph, c, result_path, result_path_nl)
