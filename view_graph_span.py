@@ -84,7 +84,7 @@ def view_graph_span(in_path, results_dir):
         # plot_component(graph, c, result_path, result_path_nl)
 
     for k in sorted(freqs.keys()):
-        print(k, keys[k]) ####
+        print(k, freqs[k]) ####
 
 if __name__ == "__main__":
     data_dir = "/oak/stanford/groups/wjg/atwang/ecdna/data"
