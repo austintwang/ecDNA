@@ -55,7 +55,7 @@ def plot_component(graph, comp, result_path, result_path_nl):
 
 def view_graph_coarse(in_path, results_dir):
     with open(in_path, "rb") as in_file:
-        node_data, edge_data, coarse_edges = pickle.load(in_file)
+        pt_data, node_data, edge_data, coarse_edges = pickle.load(in_file)
 
     blocks, blocks_cn, pt_block_map = node_data
     nodelist = []

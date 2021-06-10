@@ -242,7 +242,8 @@ def reconstruct_amplicons(in_path, out_path, resolution):
     coarse_edges = create_coarse_grained(node_data_p, edge_data_p)
     print(len(coarse_edges)) ####
 
-    res = (node_data_p, edge_data_p, coarse_edges)
+    pt_data = (points, ranks, copy_num, seqs_break)
+    res = (pt_data, node_data_p, edge_data_p, coarse_edges)
     with open(out_path, "wb") as out_file:
         pickle.dump(res, out_file)
 
