@@ -91,12 +91,12 @@ if __name__ == "__main__":
 
     results_dir_base = "/oak/stanford/groups/wjg/atwang/ecdna/results"
 
-    in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_graph.pickle")
+    in_path = os.path.join(data_dir, "COLO320DM_gDNA_nanopore_guppy_4.4_span.pickle")
     results_dir = os.path.join(results_dir_base, "COLO320DM_gDNA_nanopore_guppy_4.4")
     os.makedirs(results_dir, exist_ok=True)
-    view_graph_coarse(in_path, results_dir)
+    view_graph_span(in_path, results_dir)
 
-    in_path = os.path.join(data_dir, "PC3_gDNA_combined_graph.pickle")
+    in_path = os.path.join(data_dir, "PC3_gDNA_combined_span.pickle")
     results_dir = os.path.join(results_dir_base, "PC3_gDNA_combined")
     os.makedirs(results_dir, exist_ok=True)
-    view_graph_coarse(in_path, results_dir)
+    view_graph_span(in_path, results_dir)
