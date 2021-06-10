@@ -52,8 +52,8 @@ def plot_component(graph, comp, result_path, result_path_nl):
     labels = nx.draw_networkx_edge_labels(
         G, 
         pos, 
-        labels=edge_weights, 
-        font_size=8
+        edge_labels=edge_weights, 
+        font_size=6
     )
     plt.savefig(result_path, bbox_inches='tight')
     plt.clf()
