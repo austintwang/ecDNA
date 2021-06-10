@@ -18,7 +18,7 @@ def build_graph(pt_data, node_data, edge_data):
     edge_data = []
     for k, v in break_block_fwd.items():
         block, pt = v
-        nexts = [read, pt_n for read, pt_n in block_break_fwd.get[block] if (pt_n > pt and read in break_block_fwd)]
+        nexts = [(read, pt_n) for read, pt_n in block_break_fwd.get[block] if (pt_n > pt and read in break_block_fwd)]
         [k, read, {} for read, pt_n in nexts]
         for read, pt_n in nexts:
             r1 = k
