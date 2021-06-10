@@ -76,12 +76,12 @@ def view_graph_span(in_path, results_dir):
     for ind, c in enumerate(components):
         freqs.setdefault(len(c), 0) ####
         freqs[len(c)] += 1 ####
-        if len(c) <= 2:
+        if len(c) <= 3:
             continue
         # print(len(c)) ####
         result_path = os.path.join(plot_dir, f"span_{ind:02d}.svg")
         result_path_nl = os.path.join(plot_dir, f"span_{ind:02d}_nl.svg")
-        # plot_component(graph, c, result_path, result_path_nl)
+        plot_component(graph, c, result_path, result_path_nl)
 
     for k in sorted(freqs.keys()):
         print(k, freqs[k]) ####
