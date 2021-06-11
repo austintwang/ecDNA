@@ -26,13 +26,13 @@ def plot_component(graph, comp, result_path, result_path_nl):
     nodes = nx.draw_networkx_nodes(
         G, 
         pos, 
-        # node_size=node_sizes, 
+        node_size=30, 
         node_color="indigo"
     )
     edges = nx.draw_networkx_edges(
         G,
         pos,
-        # node_size=node_sizes,
+        node_size=30,
         arrowstyle="->",
         arrowsize=10,
         edge_color=edge_weights,
