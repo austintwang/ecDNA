@@ -18,7 +18,7 @@ def plot_component(graph, comp, result_path, result_path_nl):
     # node_len_dict = nx.get_node_attributes(G, "len")
     # node_sizes = [node_len_dict[i] / 1e4 for i in G.nodes()]
     edge_weight_dict = nx.get_edge_attributes(G, "min_cn")
-    # edge_weights = [edge_weight_dict[i] for i in G.edges()]
+    edge_weights = [edge_weight_dict[i] for i in G.edges()]
     # node_labels = nx.get_node_attributes(G, "range")
 
     cmap = plt.cm.plasma
@@ -35,7 +35,7 @@ def plot_component(graph, comp, result_path, result_path_nl):
         # node_size=node_sizes,
         arrowstyle="->",
         arrowsize=10,
-        edge_color=edge_weight_dict,
+        edge_color=edge_weights,
         edge_cmap=cmap,
         width=2,
         edge_vmin=0,
@@ -52,7 +52,7 @@ def plot_component(graph, comp, result_path, result_path_nl):
     labels = nx.draw_networkx_edge_labels(
         G, 
         pos, 
-        edge_labels=edge_weights, 
+        edge_labels=edge_weight_dict, 
         font_size=6
     )
     plt.savefig(result_path, bbox_inches='tight')
