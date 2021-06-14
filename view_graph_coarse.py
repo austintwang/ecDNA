@@ -21,7 +21,7 @@ def plot_component(graph, comp, result_path, result_path_nl):
     edge_colors = [edge_weight_dict[i] for i in G.edges()]
     node_labels = nx.get_node_attributes(G, "range")
 
-    cmap = plt.cm.plasma
+    cmap = sns.color_palette("flare", as_cmap=True)
 
     nodes = nx.draw_networkx_nodes(
         G, 
@@ -39,7 +39,8 @@ def plot_component(graph, comp, result_path, result_path_nl):
         edge_cmap=cmap,
         width=2,
         edge_vmin=0,
-        edge_vmax=5
+        edge_vmax=5,
+        alpha=0.3
     )
     plt.savefig(result_path_nl, bbox_inches='tight')
 
