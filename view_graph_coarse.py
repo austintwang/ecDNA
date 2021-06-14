@@ -2,6 +2,7 @@ import pickle
 import os
 import numpy as np
 import networkx as nx
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -40,8 +41,15 @@ def plot_component(graph, comp, result_path, result_path_nl):
         width=2,
         edge_vmin=0,
         edge_vmax=5,
-        alpha=0.7
+        alpha=0.6
     )
+    pc = mpl.collections.PatchCollection(edges, cmap=cmap)
+    pc.set_array(edge_colors)
+    plt.colorbar(pc)
+
+    ax = plt.gca()
+    ax.set_axis_off()
+
     plt.savefig(result_path_nl, bbox_inches='tight')
 
     labels = nx.draw_networkx_labels(
