@@ -40,7 +40,7 @@ def plot_component(graph, comp, result_path, result_path_nl):
         width=2,
         edge_vmin=0,
         edge_vmax=5,
-        alpha=0.3
+        alpha=0.7
     )
     plt.savefig(result_path_nl, bbox_inches='tight')
 
